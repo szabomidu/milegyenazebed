@@ -27,13 +27,17 @@ class DishController extends Controller
 
     public function saveMenuToDatabase($menuData, $menuId)
     {
-        foreach ($menuData as $menuItem){
-            Dishes::create([
-                'dish_name' => $menuItem,
-                'is_new' => false,
-                'menu_id' => $menuId,
-            ]);
+        DB::table("dishes")
+            ->delete();
+        foreach ($menuData as $menuItem) {
+            DB::table("dishes")
+                ->insert([
+                    'dish_name' => $menuItem,
+                    'is_new' => true,
+                    'menu_id' => $menuId,
+                ]);
         }
+    }
 
     }
 }

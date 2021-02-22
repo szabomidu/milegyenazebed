@@ -15,7 +15,7 @@ class MessageController extends Controller
             if ($dish->dish_name === "Lencsefőzelék" || $dish->dish_name === "LENCSEFŐZELÉK"){
                 $status = "LEGJOBB!!";
             } else {
-                $status = $dish->is_new === 1 ? "ÚJ" : "";
+                $status = $dish->is_new ? "ÚJ" : "";
             }
             $message .= "* $status $dish->dish_name\n";
         }

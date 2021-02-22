@@ -23,7 +23,7 @@ Route::get('/', function () {
         $dishes = $dishController->getDishesToMenu($menu->id);
         return view('home', ["date" => $menu->date, "dishes" => $dishes]);
     }
-})->name('home');
+})->name('home')->middleware(['auth']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

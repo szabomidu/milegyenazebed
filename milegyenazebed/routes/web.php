@@ -31,3 +31,8 @@ Route::get('/register', function (){
 
 Route::post('/register', 'App\Http\Controllers\UserController@store')->name('register');
 
+Route::get('/login', function (){
+    return view('login');
+})->name('login');
+
+Route::post('/login', 'App\Http\Controllers\UserController@login');

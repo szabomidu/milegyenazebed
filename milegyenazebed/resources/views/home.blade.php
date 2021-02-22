@@ -8,11 +8,21 @@
     <title>Mi legyen az ebéd?</title>
 </head>
 <body>
-<a href="{{url('register')}}">Registration</a><br><br>
-{{$date}}
 
-@foreach($dishes as $dish)
-    <div>{{ htmlspecialchars($dish->dish_name)}}</div>
-@endforeach
+@if( auth()->check() )
+    <a href="{{url('logout')}}"></a><br><br>
+    {{$date}}
+
+    @foreach($dishes as $dish)
+        <div>{{ htmlspecialchars($dish->dish_name)}}</div>
+    @endforeach
+
+@else
+    <a href="{{url('register')}}">Registration</a><br>
+    <a href="{{url('login')}}">Login</a><br><br>
+    <div> Log in to see the menu!</div>
+
+@endif
+
 </body>
 </html>

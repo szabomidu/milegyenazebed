@@ -40,7 +40,7 @@ class Kernel extends ConsoleKernel
         })->hourly();
         $messageController = new MessageController();
         $text = $messageController->composeMattermostMessage();
-        $command = `curl -i -X POST -H 'Content-Type: application/json' -d '{"text": . $text . }' https://mattermost.xdroid.com/hooks/j5nba3i64bdpfny19k55uxczpo`;
+        $command = 'curl -i -X POST -H \'Content-Type: application/json\' -d \'{"text": . $text . }\' https://mattermost.xdroid.com/hooks/j5nba3i64bdpfny19k55uxczpo';
         $schedule->exec($command)->hourly();
     }
 

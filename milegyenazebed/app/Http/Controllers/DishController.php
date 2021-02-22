@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Dishes;
 use Goutte\Client;
+use Illuminate\Support\Facades\DB;
 
 class DishController extends Controller
 {

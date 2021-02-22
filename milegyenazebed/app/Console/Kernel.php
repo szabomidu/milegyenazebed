@@ -31,7 +31,7 @@ class Kernel extends ConsoleKernel
             $dishController = new DishController();
             $menuData = $dishController->getMenuFromWebsite();
             $date = $menuController->getMenuDateFromWebsite();
-            $menuId = $menuController->saveMenuDateToDatabaseReturninId($date);
+            $menuId = $menuController->saveMenuDateToDatabaseReturningId($date);
             $dishController->saveMenuToDatabase($menuData, $menuId);
         })->hourly();
     }

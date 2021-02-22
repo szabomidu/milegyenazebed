@@ -26,7 +26,7 @@ class MenuController extends Controller
     }
 
 
-    public function saveMenuDateToDatabaseReturninId($date)
+    public function saveMenuDateToDatabaseReturningId($date)
     {
         $menu = Menu::where('date', $date)
             ->get();

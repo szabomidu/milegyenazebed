@@ -36,4 +36,11 @@ class MenuController extends Controller
         }
         return $menu->id;
     }
+
+    public function getMenuDateAndId($date)
+    {
+        return DB::table('menu')
+            ->where('date', $date)
+            ->first();
+    }
 }

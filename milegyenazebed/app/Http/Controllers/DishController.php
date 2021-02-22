@@ -39,5 +39,10 @@ class DishController extends Controller
         }
     }
 
+    public function getDishesToMenu($menuId)
+    {
+        return DB::table("dishes")
+            ->where('menu_id', $menuId)
+            ->get();
     }
 }

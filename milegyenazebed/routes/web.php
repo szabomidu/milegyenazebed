@@ -19,6 +19,8 @@ Route::get('/', function () {
     $menuController = new MenuController();
     $dishController = new DishController();
     $menu = $menuController->getMenuDateAndId(date("Y.m.d"));
-    $dishes = $dishController->getDishesToMenu($menu->id);
-    return view('home', ["date" => $menu->date, "dishes" => $dishes]);
+    if ($menu) {
+        $dishes = $dishController->getDishesToMenu($menu->id);
+        return view('home', ["date" => $menu->date, "dishes" => $dishes]);
+    }
 });

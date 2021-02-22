@@ -8,12 +8,10 @@
     <title>Mi legyen az ebéd?</title>
 </head>
 <body>
-@foreach($date as $d)
-    {{$d}}
+{{$date}}
 
-@endforeach
-@foreach($menuData as $menuItem)
-    <div>{{$menuItem}}</div>
+@foreach($dishes as $dish)
+    <div>{{ htmlspecialchars($dish->dish_name)}}</div>
 @endforeach
 </body>
 </html>

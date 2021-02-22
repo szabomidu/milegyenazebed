@@ -13,9 +13,9 @@ class CreateMenusTable extends Migration
      */
     public function up()
     {
-        Schema::create('menu', function (Blueprint $table) {
+        Schema::create('menus', function (Blueprint $table) {
             $table->id();
-            $table->date("date");
+            $table->string("date");
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ class CreateMenusTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('menu');
+        Schema::dropIfExists('menus');
     }
 }

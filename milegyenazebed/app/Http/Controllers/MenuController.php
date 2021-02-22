@@ -28,21 +28,22 @@ class MenuController extends Controller
 
     public function saveMenuDateToDatabaseReturningId($date)
     {
-        $menu = DB::table("menu")
-            ->where('date', $date)
-            ->first();
-        if ($menu === null) {
-            return DB::table('menu')
-                ->insertGetId([
-                    'date' => $date
-                ]);
-        }
-        return $menu->id;
+        return DB::table('menu')
+            ->insertGetId([
+                'date' => $date
+            ]);
     }
 
     public function getMenuDateAndId($date)
     {
         return DB::table('menu')
+            ->where('date', $date)
+            ->first();
+    }
+
+    public function checkIfMenuExists($date)
+    {
+        return DB::table("menu")
             ->where('date', $date)
             ->first();
     }

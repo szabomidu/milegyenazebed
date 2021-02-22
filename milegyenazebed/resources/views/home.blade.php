@@ -14,7 +14,13 @@
     {{$date}}
 
     @foreach($dishes as $dish)
-        <div>{{ htmlspecialchars($dish->dish_name)}}</div>
+        <div>@if($dish->dish_name === "Lencsefőzelék" || $dish->dish_name === "LENCSEFŐZELÉK")
+                 LEGJOBB!!
+            @elseif($dish->is_new)
+                ÚJ
+            @endif
+            {{ htmlspecialchars($dish->dish_name)}}
+        </div>
     @endforeach
 
 @else

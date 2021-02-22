@@ -4,6 +4,7 @@ namespace App\Console;
 
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\DishController;
+use App\Http\Controllers\MessageController;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -31,9 +32,16 @@ class Kernel extends ConsoleKernel
             $dishController = new DishController();
             $menuData = $dishController->getMenuFromWebsite();
             $date = $menuController->getMenuDateFromWebsite();
-            $menuId = $menuController->saveMenuDateToDatabaseReturningId($date[0]);
-            $dishController->saveMenuToDatabase($menuData, $menuId);
+            $menuInDB = $menuController->checkIfMenuExists($date[0]);
+            if($menuInDB === null) {
+                $menuId = $menuController->saveMenuDateToDatabaseReturningId($date[0]);
+                $dishController->saveMenuToDatabase($menuData, $menuId);
+            }
         })->hourly();
+        $messageController = new MessageController();
+        $text = $messageController->composeMattermostMessage();
+        $command = `curl -i -X POST -H 'Content-Type: application/json' -d '{"text": . $text . }' https://mattermost.xdroid.com/hooks/j5nba3i64bdpfny19k55uxczpo`;
+        $schedule->exec($command)->hourly();
     }
 
     /**

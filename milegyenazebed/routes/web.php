@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\DishController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MenuController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,16 +25,8 @@ Route::get('/', function () {
     }
 })->name('home');
 
-Route::get('/register', function (){
-    return view('registration');
-});
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
-Route::post('/register', 'App\Http\Controllers\UserController@store')->name('register');
-
-Route::get('/login', function (){
-    return view('login');
-})->name('login');
-
-Route::post('/login', 'App\Http\Controllers\UserController@login');
-
-Route::get('logout', 'App\Http\Controllers\UserController@logout');
+require __DIR__.'/auth.php';

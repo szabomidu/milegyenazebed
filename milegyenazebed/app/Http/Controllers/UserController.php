@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -24,5 +25,25 @@ class UserController extends Controller
                 'name' => $username,
                 'password' => Hash::make($password)]);
         return redirect()->route('home');
+    }
+
+    public function login(Request $request)
+    {
+
+        $request->validate([
+            'name' => 'required',
+            'password' => 'required',
+        ]);
+
+        $userdata = array(
+            'name' => $request->name,
+            'password' => $request->password
+        );
+
+        if (Auth::attempt($userdata)) {
+            return redirect()->route('home');
+        } else {
+            return redirect()->route('login');
+        }
     }
 }

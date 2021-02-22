@@ -10,7 +10,7 @@
 <body>
 
 @if( auth()->check() )
-    <a href="{{url('logout')}}"></a><br><br>
+    <a href="{{url('logout')}}">Logout</a><br><br>
     {{$date}}
 
     @foreach($dishes as $dish)

@@ -13,5 +13,7 @@ class Dishes extends Model
         'dish_name',
         'is_new',
         'menu_id',
+        'updated_at',
+        'created_at'
     ];
 }

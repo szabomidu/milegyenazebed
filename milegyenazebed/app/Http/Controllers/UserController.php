@@ -14,15 +14,18 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'unique:users|required|max:50',
+            'email' => 'unique:users|required|max:50',
             'password' => 'required|same:password_confirmation',
             'password_confirmation' => 'required'
         ]);
 
         $username = $request->name;
+        $username = $request->email;
         $password = $request->password;
         DB::table('users')
             ->insert([
                 'name' => $username,
+                'email' => $username,
                 'password' => Hash::make($password)]);
         return redirect()->route('home');
     }

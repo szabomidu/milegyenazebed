@@ -32,7 +32,10 @@ class MenuController extends Controller
             ->where('date', $date)
             ->first();
         if ($menu === null) {
-            return DB::table('menu')->insertGetId(['date' => $date]);
+            return DB::table('menu')
+                ->insertGetId([
+                    'date' => $date
+                ]);
         }
         return $menu->id;
     }

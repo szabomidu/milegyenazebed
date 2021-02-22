@@ -36,3 +36,5 @@ Route::get('/login', function (){
 })->name('login');
 
 Route::post('/login', 'App\Http\Controllers\UserController@login');
+
+Route::get('logout', 'App\Http\Controllers\UserController@logout');

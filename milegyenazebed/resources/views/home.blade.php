@@ -8,6 +8,7 @@
     <title>Mi legyen az ebéd?</title>
 </head>
 <body>
+<a href="{{url('register')}}">Registration</a><br><br>
 {{$date}}
 
 @foreach($dishes as $dish)

@@ -23,4 +23,11 @@ Route::get('/', function () {
         $dishes = $dishController->getDishesToMenu($menu->id);
         return view('home', ["date" => $menu->date, "dishes" => $dishes]);
     }
+})->name('home');
+
+Route::get('/register', function (){
+    return view('registration');
 });
+
+Route::post('/register', 'App\Http\Controllers\UserController@store')->name('register');
+

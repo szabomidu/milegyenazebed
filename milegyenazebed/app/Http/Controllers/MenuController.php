@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Menu;
 use Goutte\Client;
+use Illuminate\Support\Facades\DB;
 
 class MenuController extends Controller
 {

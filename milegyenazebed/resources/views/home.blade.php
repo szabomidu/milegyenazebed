@@ -10,7 +10,7 @@
 </head>
 <body>
 <script>
-    let data = [[1,1,1,1,1],[2,2,2,2,2], [3,3,3,3,3], [4,4,4,4,4], [5,5,5,5,5], [6,6,6,6,6], [7,7,7,7,7], [8,8,8,8,8], [9,9,9,9,9], [10,10,10,10,10], [11,11,11,11,11], [12,12,12,12,12]]
+    let data = {!! json_encode($data) !!};
     document.addEventListener('DOMContentLoaded', function () {
         Highcharts.chart('container', {
             chart: {
@@ -20,7 +20,7 @@
                 text: 'Top 15 food from 2019 to 2021'
             },
             xAxis: {
-                categories: ['Africa', 'America', 'Asia', 'Europe', 'Oceania'],
+                categories: {!! json_encode($topfood["food"]) !!},
                 title: {
                     text: null
                 }
@@ -62,7 +62,7 @@
             },
             series: [{
                 name: '2019-2021',
-                data: [98, 76, 54, 32, 11]
+                data: {!! json_encode($topfood["numbers"]) !!},
             }]
         });
 
@@ -73,7 +73,7 @@
                 chart.series[0].update({
                     data: data[month]
                 }, false, false, false);
-                chart.xAxis[0].categories=data[month]
+                chart.xAxis[0].categories=data[month];
                 chart.redraw();
             });
         })
@@ -81,18 +81,18 @@
 </script>
 
 <select name="" id="select">
-    <option value="0">January</option>
-    <option value="1">February</option>
-    <option value="2">March</option>
-    <option value="3">April</option>
-    <option value="4">May</option>
-    <option value="5">June</option>
-    <option value="6">July</option>
-    <option value="7">August</option>
-    <option value="8">September</option>
-    <option value="9">October</option>
-    <option value="10">November</option>
-    <option value="11">December</option>
+    <option value="1">January</option>
+    <option value="2">February</option>
+    <option value="3">March</option>
+    <option value="4">April</option>
+    <option value="5">May</option>
+    <option value="6">June</option>
+    <option value="7">July</option>
+    <option value="8">August</option>
+    <option value="9">September</option>
+    <option value="10">October</option>
+    <option value="11">November</option>
+    <option value="12">December</option>
 </select>
 <div id="container" style="width:100%; height:400px;"></div>
 

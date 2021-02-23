@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dishes;
 use Illuminate\Support\Facades\DB;
 
 class ChartController extends Controller
@@ -11,8 +12,7 @@ class ChartController extends Controller
         $food = array();
         $count = array();
 
-        $result = DB::table('dishes')
-            ->select('dish_name', DB::raw('COUNT(dish_name) as dish_count'))
+        $result = Dishes::select('dish_name', DB::raw('COUNT(dish_name) as dish_count'))
             ->groupBy('dish_name')
             ->orderBy(DB::raw('COUNT(dish_name)'), 'DESC')
             ->take(15)

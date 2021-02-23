@@ -36,12 +36,14 @@ class Kernel extends ConsoleKernel
             if($menuInDB === null) {
                 $menuId = $menuController->saveMenuDateToDatabaseReturningId($date[0]);
                 $dishController->saveMenuToDatabase($menuData, $menuId);
+                $messageController = new MessageController();
+                $text = $messageController->composeMattermostMessage();
+                $command = 'curl -i -X POST -H \'Content-Type: application/json\' -d \'{"text": "' . $text . '" }\' https://mattermost.xdroid.com/hooks/j5nba3i64bdpfny19k55uxczpo';
+                shell_exec($command);
             }
-        })->hourly();
-        $messageController = new MessageController();
-        $text = $messageController->composeMattermostMessage();
-        $command = `curl -i -X POST -H 'Content-Type: application/json' -d '{"text": . $text . }' https://mattermost.xdroid.com/hooks/j5nba3i64bdpfny19k55uxczpo`;
-        $schedule->exec($command)->hourly();
+        })->everyMinute();
+
+
     }
 
     /**

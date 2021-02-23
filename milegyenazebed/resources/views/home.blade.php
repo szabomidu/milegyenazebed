@@ -10,7 +10,10 @@
 <body>
 
 @if( auth()->check() )
-    <a href="{{url('logout')}}">Logout</a><br><br>
+    <form action="{{url('logout')}}" method="post">
+        @csrf
+        <input type="submit" value="Logout">
+    </form>
     {{$date}}
 
     @foreach($dishes as $dish)

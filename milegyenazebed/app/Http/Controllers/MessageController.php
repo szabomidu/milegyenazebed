@@ -10,7 +10,7 @@ class MessageController extends Controller
         $dishController = new DishController();
         $menu = $menuController->getMenuDateAndId(date("Y.m.d"));
         $dishes = $dishController->getDishesToMenu($menu->id);
-        $message = "    ## :warning: Napi menü - $menu->date :warning: \n";
+        $message = "## :warning: Napi menü - $menu->date :warning: \n";
         foreach ($dishes as $dish){
             if ($dish->dish_name === "Lencsefőzelék" || $dish->dish_name === "LENCSEFŐZELÉK"){
                 $status = "LEGJOBB!!";

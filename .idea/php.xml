@@ -77,7 +77,6 @@
       <path value="$PROJECT_DIR$/milegyenazebed/vendor/sebastian/object-enumerator" />
       <path value="$PROJECT_DIR$/milegyenazebed/vendor/sebastian/type" />
       <path value="$PROJECT_DIR$/milegyenazebed/vendor/sebastian/diff" />
-      <path value="$PROJECT_DIR$/milegyenazebed/vendor/fakerphp/faker" />
       <path value="$PROJECT_DIR$/milegyenazebed/vendor/guzzlehttp/guzzle" />
       <path value="$PROJECT_DIR$/milegyenazebed/vendor/ralouphie/getallheaders" />
       <path value="$PROJECT_DIR$/milegyenazebed/vendor/guzzlehttp/promises" />
@@ -113,7 +112,9 @@
       <path value="$PROJECT_DIR$/milegyenazebed/vendor/symfony/browser-kit" />
       <path value="$PROJECT_DIR$/milegyenazebed/vendor/fabpot/goutte" />
       <path value="$PROJECT_DIR$/milegyenazebed/vendor/laravel/breeze" />
+      <path value="$PROJECT_DIR$/milegyenazebed/vendor/fakerphp/faker" />
+      <path value="$PROJECT_DIR$/milegyenazebed/vendor/jzonta/faker-restaurant" />
     </include_path>
   </component>
-  <component name="PhpProjectSharedConfiguration" php_language_level="7.4" />
+  <component name="PhpProjectSharedConfiguration" php_language_level="7.3" />
 </project>

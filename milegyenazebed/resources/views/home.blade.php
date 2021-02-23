@@ -5,9 +5,68 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://code.highcharts.com/highcharts.js"></script>
     <title>Mi legyen az ebéd?</title>
 </head>
 <body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {Highcharts.chart('container', {
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: 'Top 15 food from 2019 to 2021'
+        },
+        xAxis: {
+            categories: {!! json_encode($data["food"]) !!},
+            title: {
+                text: null
+            }
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Occurrence of the food (days)',
+                align: 'high'
+            },
+            labels: {
+                overflow: 'justify'
+            }
+        },
+        tooltip: {
+            valueSuffix: ' days'
+        },
+        plotOptions: {
+            bar: {
+                dataLabels: {
+                    enabled: true
+                }
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'top',
+            x: -40,
+            y: 80,
+            floating: true,
+            borderWidth: 1,
+            backgroundColor:
+                Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
+            shadow: true
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            name: '2019-2021',
+            data: {!! json_encode($data["numbers"]) !!}
+        }]
+    });
+    });
+</script>
+
+<div id="container" style="width:100%; height:400px;"></div>
 
 @if( auth()->check() )
     <form action="{{url('logout')}}" method="post">

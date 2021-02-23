@@ -16,13 +16,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $menuController = new MenuController();
-    $dishController = new DishController();
-    $menu = $menuController->getMenuDateAndId(date("Y.m.d"));
-    if ($menu) {
-        $dishes = $dishController->getDishesToMenu($menu->id);
-        return view('home', ["date" => $menu->date, "dishes" => $dishes]);
-    }
+    //$menuController = new MenuController();
+    //$dishController = new DishController();
+    //$menu = $menuController->getMenuDateAndId(date("Y.m.d"));
+    //if ($menu) {
+    //    $dishes = $dishController->getDishesToMenu($menu->id);
+    //    return view('home', ["date" => $menu->date, "dishes" => $dishes]);
+    //} else {
+    \App\Http\Controllers\FakerController::createFakeData();
+        return view('home', ["date" => "No dishes for today yet", "dishes" => []]);
+    //}
 })->name('home')->middleware(['auth']);
 
 Route::get('/dashboard', function () {

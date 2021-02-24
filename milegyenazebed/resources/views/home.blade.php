@@ -96,6 +96,17 @@
 </select>
 <div id="container" style="width:100%; height:400px;"></div>
 
+<form method="POST" action="/">
+    @csrf
+    <select name="subscription" id="subscription">
+        @foreach($selectOptions as $option)
+            <option value="{{$option->dish_name}}"> {{strtoupper($option->dish_name)}} </option>
+        @endforeach
+    </select>
+    <input type="submit" value="Subscribe">
+</form>
+
+
 @if( auth()->check() )
     <form action="{{url('logout')}}" method="post">
         @csrf
@@ -109,7 +120,7 @@
             @elseif($dish->is_new)
                 ÚJ
             @endif
-            {{ htmlspecialchars($dish->dish_name)}}
+            {!! ucfirst(strtolower($dish->dish_name)) !!}
         </div>
     @endforeach
 

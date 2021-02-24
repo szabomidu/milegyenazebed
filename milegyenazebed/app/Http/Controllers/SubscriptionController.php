@@ -50,12 +50,29 @@ class SubscriptionController extends Controller
         $subscriptions = Subscription::select('username', 'dish_name')
             ->get();
 
-        foreach ($subscriptions as $subscription){
-            if (strpos($dish, strtolower($subscription->dish_name)) !== false){
+        foreach ($subscriptions as $subscription) {
+            if (strpos($dish, strtolower($subscription->dish_name)) !== false) {
                 array_push($subscribers, $subscription->username);
             }
         }
 
         return $subscribers;
+    }
+
+    public static function getSubscriptions()
+    {
+        $id = Auth::id();
+
+        return Subscription::select('id', 'dish_name')
+            ->where('user_id', $id)
+            ->get();
+    }
+
+    public static function unSubscribe(Request $request)
+    {
+        $id = $request->id;
+
+        return Subscription::where('id', $id)
+            ->delete();
     }
 }

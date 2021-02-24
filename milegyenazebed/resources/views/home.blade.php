@@ -10,62 +10,90 @@
 </head>
 <body>
 <script>
-    document.addEventListener('DOMContentLoaded', function () {Highcharts.chart('container', {
-        chart: {
-            type: 'bar'
-        },
-        title: {
-            text: 'Top 15 food from 2019 to 2021'
-        },
-        xAxis: {
-            categories: {!! json_encode($data["food"]) !!},
-            title: {
-                text: null
-            }
-        },
-        yAxis: {
-            min: 0,
-            title: {
-                text: 'Occurrence of the food (days)',
-                align: 'high'
+    let data = {!! json_encode($data) !!};
+    document.addEventListener('DOMContentLoaded', function () {
+        Highcharts.chart('container', {
+            chart: {
+                type: 'bar'
             },
-            labels: {
-                overflow: 'justify'
-            }
-        },
-        tooltip: {
-            valueSuffix: ' days'
-        },
-        plotOptions: {
-            bar: {
-                dataLabels: {
-                    enabled: true
+            title: {
+                text: 'Top 15 food from 2019 to 2021'
+            },
+            xAxis: {
+                categories: {!! json_encode($topfood["food"]) !!},
+                title: {
+                    text: null
                 }
-            }
-        },
-        legend: {
-            layout: 'vertical',
-            align: 'right',
-            verticalAlign: 'top',
-            x: -40,
-            y: 80,
-            floating: true,
-            borderWidth: 1,
-            backgroundColor:
-                Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
-            shadow: true
-        },
-        credits: {
-            enabled: false
-        },
-        series: [{
-            name: '2019-2021',
-            data: {!! json_encode($data["numbers"]) !!}
-        }]
-    });
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Occurrence of the food (days)',
+                    align: 'high'
+                },
+                labels: {
+                    overflow: 'justify'
+                }
+            },
+            tooltip: {
+                valueSuffix: ' days'
+            },
+            plotOptions: {
+                bar: {
+                    dataLabels: {
+                        enabled: true
+                    }
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -40,
+                y: 80,
+                floating: true,
+                borderWidth: 1,
+                backgroundColor:
+                    Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
+                shadow: true
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                name: '2019-2021',
+                data: {!! json_encode($topfood["numbers"]) !!},
+            }]
+        });
+
+        let select = document.getElementById('select');
+        select.addEventListener('change', (e) => {
+            let month = e.target.value;
+            Highcharts.charts.forEach((chart) => {
+                chart.series[0].update({
+                    data: data[month]
+                }, false, false, false);
+                chart.xAxis[0].categories=data[month];
+                chart.redraw();
+            });
+        })
     });
 </script>
 
+<select name="" id="select">
+    <option value="1">January</option>
+    <option value="2">February</option>
+    <option value="3">March</option>
+    <option value="4">April</option>
+    <option value="5">May</option>
+    <option value="6">June</option>
+    <option value="7">July</option>
+    <option value="8">August</option>
+    <option value="9">September</option>
+    <option value="10">October</option>
+    <option value="11">November</option>
+    <option value="12">December</option>
+</select>
 <div id="container" style="width:100%; height:400px;"></div>
 
 @if( auth()->check() )
@@ -77,7 +105,7 @@
 
     @foreach($dishes as $dish)
         <div>@if($dish->dish_name === "Lencsefőzelék" || $dish->dish_name === "LENCSEFŐZELÉK")
-                 LEGJOBB!!
+                LEGJOBB!!
             @elseif($dish->is_new)
                 ÚJ
             @endif

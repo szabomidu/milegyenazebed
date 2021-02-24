@@ -20,10 +20,12 @@ Route::get('/', function () {
     $menuController = new MenuController();
     $dishController = new DishController();
     $menu = $menuController->getMenuDateAndId(date("Y.m.d"));
-   $topFood = ChartController::getTopFood();
+    //\App\Http\Controllers\FakerController::createFakeData();
+    $monthlyData = ChartController::getMonthlyData();
+    $topFood = ChartController::getTopFood();
     if ($menu) {
         $dishes = $dishController->getDishesToMenu($menu->id);
-        return view('home', ["date" => $menu->date, "dishes" => $dishes, "data" => $topFood]);
+        return view('home', ["date" => $menu->date, "dishes" => $dishes, "data" => $monthlyData, "topfood" => $topFood]);
     } else {
         return view('home', ["date" => "No dishes for today yet", "dishes" => []]);
     }

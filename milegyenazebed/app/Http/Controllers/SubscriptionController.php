@@ -43,10 +43,19 @@ class SubscriptionController extends Controller
         ]);
     }
 
-    public static function getSubscriberToDish($dish_name)
+    public static function getSubscriberToDish($dish)
     {
-        return Subscription::select('username')
-            ->where('dish_name', "=", $dish_name)
+        $subscribers = array();
+
+        $subscriptions = Subscription::select('username', 'dish_name')
             ->get();
+
+        foreach ($subscriptions as $subscription){
+            if (strpos($dish, strtolower($subscription->dish_name)) !== false){
+                array_push($subscribers, $subscription->username);
+            }
+        }
+
+        return $subscribers;
     }
 }

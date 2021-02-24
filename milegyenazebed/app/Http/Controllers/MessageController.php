@@ -12,7 +12,7 @@ class MessageController extends Controller
         $dishes = $dishController->getDishesToMenu($menu->id);
         $message = "## :warning: Napi menü - $menu->date :warning: \n";
         foreach ($dishes as $dish){
-            $subscribers = SubscriptionController::getSubscriberToDish($dish->dish_name);
+            $subscribers = SubscriptionController::getSubscriberToDish(strtolower($dish->dish_name));
             if ($dish->dish_name === "Lencsefőzelék" || $dish->dish_name === "LENCSEFŐZELÉK"){
                 $status = "LEGJOBB!!";
             } else {
@@ -20,7 +20,7 @@ class MessageController extends Controller
             }
             $message .= "* " . $status . ucfirst(strtolower($dish->dish_name)) . " ";
             foreach ($subscribers as $subscriber){
-                $message .= " @$subscriber->username ";
+                $message .= " @$subscriber ";
             }
             $message .= "\n";
         }

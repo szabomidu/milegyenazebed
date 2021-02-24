@@ -30,7 +30,7 @@ class SubscriptionController extends Controller
         return $notSubscribedFood;
     }
 
-    public static function addSubscription(Request $request)
+    public static function subscribe(Request $request)
     {
         $value = $request->subscription;
         $id = Auth::id();

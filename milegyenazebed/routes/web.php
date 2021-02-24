@@ -34,8 +34,8 @@ Route::get('/', function () {
     }
 })->name('home')->middleware(['auth']);
 
-Route::post('/', function (Request $request) {
-    SubscriptionController::addSubscription($request);
+Route::post('/subscribe', function (Request $request) {
+    SubscriptionController::subscribe($request);
     return redirect()->route('home');
 });
 

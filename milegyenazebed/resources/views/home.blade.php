@@ -96,14 +96,21 @@
 </select>
 <div id="container" style="width:100%; height:400px;"></div>
 
-<form method="POST" action="/">
+<form method="POST" action="/subscribe">
     @csrf
-    <select name="subscription" id="subscription">
+    <label for="subscription">Subscribe for existing food:</label><select name="subscription" id="subscription">
         @foreach($selectOptions as $option)
             <option value="{{$option->dish_name}}"> {{strtoupper($option->dish_name)}} </option>
         @endforeach
     </select>
     <input type="submit" value="Subscribe">
+</form>
+
+<form method="POST" action="/subscribe">
+    @csrf
+    <label for="subscription">Add new food to subscribe for:</label>
+    <input type="text" name="subscription" id="subscription">
+    <input type="submit" value="Add new subscription">
 </form>
 
 

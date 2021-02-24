@@ -26,9 +26,10 @@ Route::get('/', function () {
     $notSubscribedFood = SubscriptionController::getNotSubscribedFood();
     $monthlyData = ChartController::getMonthlyData();
     $topFood = ChartController::getTopFood();
+    $subscriptions = SubscriptionController::getSubscriptions();
     if ($menu) {
         $dishes = $dishController->getDishesToMenu($menu->id);
-        return view('home', ["date" => $menu->date, "dishes" => $dishes, "data" => $monthlyData, "topfood" => $topFood, "selectOptions" => $notSubscribedFood]);
+        return view('home', ["date" => $menu->date, "dishes" => $dishes, "data" => $monthlyData, "topfood" => $topFood, "selectOptions" => $notSubscribedFood, "subscriptions" => $subscriptions]);
     } else {
         return view('home', ["date" => "No dishes for today yet", "dishes" => []]);
     }

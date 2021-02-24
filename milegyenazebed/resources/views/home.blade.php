@@ -73,7 +73,7 @@
                 chart.series[0].update({
                     data: data[month]
                 }, false, false, false);
-                chart.xAxis[0].categories=data[month];
+                chart.xAxis[0].categories = data[month];
                 chart.redraw();
             });
         })
@@ -127,7 +127,7 @@
             @elseif($dish->is_new)
                 ÚJ
             @endif
-            {!! ucfirst(strtolower($dish->dish_name)) !!}
+            {!! strtoupper($dish->dish_name) !!}
         </div>
     @endforeach
 

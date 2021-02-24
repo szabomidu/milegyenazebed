@@ -114,6 +114,20 @@
 </form>
 
 
+<div>Subscriptions:</div>
+@if(count($subscriptions) != 0)
+    @foreach($subscriptions as $subscription)
+        <form method="POST" action="/unsubscribe">
+            @csrf
+            <input type="hidden" name="id" value={{$subscription->id}}>
+            <div>{{$subscription->dish_name}}<input type="submit" value="Unsubscribe"></div>
+        </form>
+    @endforeach
+@else
+    <div>There are no subscriptions yet.</div>
+@endif
+
+
 @if( auth()->check() )
     <form action="{{url('logout')}}" method="post">
         @csrf

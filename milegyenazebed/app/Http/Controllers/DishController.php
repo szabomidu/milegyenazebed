@@ -21,7 +21,7 @@ class DishController extends Controller
     public function getMenuFromWebsite(): array
     {
         $this->crawler->filter('.woocommerce-loop-product__title')->each(function ($node) {
-            array_push($this->menuData, $node->text());
+            array_push($this->menuData, strtoupper($node->text()));
         });
         return $this->menuData;
     }

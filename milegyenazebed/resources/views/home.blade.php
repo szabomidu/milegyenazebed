@@ -73,7 +73,7 @@
                 chart.series[0].update({
                     data: data[month]
                 }, false, false, false);
-                chart.xAxis[0].categories=data[month];
+                chart.xAxis[0].categories = data[month];
                 chart.redraw();
             });
         })
@@ -96,6 +96,38 @@
 </select>
 <div id="container" style="width:100%; height:400px;"></div>
 
+<form method="POST" action="/subscribe">
+    @csrf
+    <label for="subscription">Subscribe for existing food:</label><select name="subscription" id="subscription">
+        @foreach($selectOptions as $option)
+            <option value="{{$option->dish_name}}"> {{strtoupper($option->dish_name)}} </option>
+        @endforeach
+    </select>
+    <input type="submit" value="Subscribe">
+</form>
+
+<form method="POST" action="/subscribe">
+    @csrf
+    <label for="subscription">Add new food to subscribe for:</label>
+    <input type="text" name="subscription" id="subscription">
+    <input type="submit" value="Add new subscription">
+</form>
+
+
+<div>Subscriptions:</div>
+@if(count($subscriptions) != 0)
+    @foreach($subscriptions as $subscription)
+        <form method="POST" action="/unsubscribe">
+            @csrf
+            <input type="hidden" name="id" value={{$subscription->id}}>
+            <div>{{$subscription->dish_name}}<input type="submit" value="Unsubscribe"></div>
+        </form>
+    @endforeach
+@else
+    <div>There are no subscriptions yet.</div>
+@endif
+
+
 @if( auth()->check() )
     <form action="{{url('logout')}}" method="post">
         @csrf
@@ -109,7 +141,7 @@
             @elseif($dish->is_new)
                 ÚJ
             @endif
-            {{ htmlspecialchars($dish->dish_name)}}
+            {!! strtoupper($dish->dish_name) !!}
         </div>
     @endforeach
 
